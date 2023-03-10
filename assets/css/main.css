@@ -9080,7 +9080,7 @@ span.fi-rs-apps {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    min-width: 412px;
+    /* min-width: 412px; */
 }
 
 .categories-dropdown-active-large {
