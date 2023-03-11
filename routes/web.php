@@ -17,6 +17,7 @@ Route::view('/login', 'login')->name('login');
 Route::view('/register', 'register')->name('register');
 Route::get('/admin', [\App\Http\Controllers\GetController::class, 'GetAdmin'])->middleware('AdminCheck')->name('admin');
 Route::get('/search', [\App\Http\Controllers\GetController::class, 'GetSearch'])->name('search');
+Route::get('/contacts', [\App\Http\Controllers\GetController::class, 'GetContacts'])->name('contacts');
 
 Route::get('/type/{id}', [\App\Http\Controllers\GetController::class, 'GetType'])->name('typePage');
 Route::get('/type/{id}/{product_id}', [\App\Http\Controllers\GetController::class, 'GetProduct'])->name('productPage');

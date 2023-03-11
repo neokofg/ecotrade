@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Auth;
 class GetController extends Controller
 {
     protected function GetIndex(Request $request){
-        $products = Cache::remember('index',15,function(){
+        $products = Cache::remember('indexProducts', 15, function(){
             return Product::take(9)->get();
         });
-        return view('index', compact(['products']));
+        $categories = Cache::remember('indexCategory', 15, function (){
+           return Type::take(3)->get();
+        });
+        return view('index', compact(['products','categories']));
     }
     protected function GetAdmin(){
         $types = DB::table('types')->get();
@@ -32,7 +35,7 @@ class GetController extends Controller
         return view('type', compact(['products','type_id']));
     }
     protected function GetProduct($id,$product_id){
-        //commentaries
+//        commentaries
         $comments = Comment::where('product_id',$product_id)->orderBy('created_at','DESC')->get();
         $commentStars = Comment::where('product_id',$product_id)->get('stars');
         $midAriphStar = 0;
@@ -60,6 +63,10 @@ class GetController extends Controller
             return view('product',compact(['product','cartIds','i','favsIds','decodedChars','comments','midAriphStar','images']));
         }
         return view('product',compact(['product','decodedChars','comments','midAriphStar','images']));
+    }
+    protected function GetContacts()
+    {
+        return view('contacts');
     }
     protected function GetCart(){
         $userCart = DB::table('users')->where('id', '=', Auth::user()->id)->get('cart');

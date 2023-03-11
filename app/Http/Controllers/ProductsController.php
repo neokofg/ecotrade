@@ -27,7 +27,7 @@ class ProductsController extends Controller
         $newChars = json_encode($newChars, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         $file= $request->file('image');
         $filename= date('YmdHi').$file->hashName();
-        $file-> move(public_path('images'), $filename);
+        $file-> move(public_path('assets/imgs/banner/'), $filename);
         $data = array('name' => $name,'image'=> $filename, "created_at" =>  date('Y-m-d H:i:s'),
             "updated_at" => date('Y-m-d H:i:s'));
         DB::table('types')->insert($data);
@@ -61,7 +61,7 @@ class ProductsController extends Controller
         foreach($request->file('image') as $key => $image)
         {
             $fileName= date('YmdHi').$image->hashName();
-            $image-> move(public_path('images'), $fileName);
+            $image-> move(public_path('assets/imgs/shop/'), $fileName);
             $insert[$key]['name'] = $fileName;
         }
         $chars = DB::table('chars')->where('type_id','=', $type)->get();
